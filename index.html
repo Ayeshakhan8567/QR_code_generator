@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>QR Code Generator</title>
+</head>
+
+<body>
+
+    <!-- Main Card Container -->
+    <div class="Card">
+
+        <!-- Instruction Text -->
+        <p>Enter Name or URL</p>
+
+        <!-- Input Field Container -->
+        <div class="inputfield">
+
+            <!-- Input where user enters text or URL -->
+            <input id="Inp" type="text" class="input" placeholder="Generate Qr">
+
+        </div>
+
+        <!-- QR Code Image Container -->
+        <div class="qrImg">
+
+            <!-- QR Code image will appear here -->
+            <img id="qrPic" src="" alt="QR Code">
+
+        </div>
+
+        <!-- Button to generate QR code -->
+        <button onclick="generateQrCode()" class="qrButton">
+            Generate QR code
+        </button>
+
+    </div>
+
+
+    <script>
+        // Getting input element
+        let inputValue = document.getElementById("Inp");
+
+        // Getting image element
+        let img = document.getElementById("qrPic");
+
+        // Function to generate QR code
+        function generateQrCode() {
+
+            // Checking if input is not empty
+            if (inputValue.value.trim().length > 0) {
+
+                // Generating QR Code using API
+                img.src = "https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=" + inputValue.value;
+
+                // Showing QR Code image
+                img.style.display = "block";
+
+            } else {
+
+                // Adding error animation if input is empty
+                inputValue.classList.add("error");
+
+                // Removing error animation after 1 second
+                setTimeout(() => {
+                    inputValue.classList.remove("error");
+                }, 1000);
+            }
+        }
+    </script>
+
+</body>
+</html>
